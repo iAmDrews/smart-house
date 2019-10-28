@@ -1,0 +1,24 @@
+class DigitalWatch
+   state
+     #name: String
+     #state: Boolean
+     #color: [String]
+     #currentColor: String
+     #brightness: Number
+     #clock: String
+   behaviour
+     +constructor(name)
+     +get name(): String
+     +on(): void
+     +off(): void
+     +get state(): Boolean
+     +changeColor(value: String): void
+     +get color: String
+     +increaseBrightness(): void
+     +decreaseBrightness(): void
+     +get brightness(): Number
+     #setUpClock(): String
+     #clockStart(): void
+     #clockStop(): void
+
+     
