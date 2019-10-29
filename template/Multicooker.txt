@@ -1,0 +1,29 @@
+Class Multicooker
+   state
+      #name: 	    String
+      #state: 	    Boolean
+      #taskList:    [String]
+      #task:        Number
+      #currentTask: Number
+      #temperature: Number
+   behaviour
+      #nameChecker(String)      void
+      #taskChecker(Number)      void
+
+      +constructor(name) 
+       
+      +get name():              String
+      +set name(String):        void  
+      +on():                    void
+      +off():                   void
+      +get state():             Boolean
+      +get taskList():          String
+      +get task():              String
+      +set task():              void
+      +get currentTask():       String
+      +nextTask():              void
+      +previousTask():          void 
+      +increaseTemperature():   void
+      +decreaseTemperature():   void
+      +get temperature():       Number
+				
