@@ -9,5 +9,18 @@
     },
     "parserOptions": {
         "ecmaVersion": 8
+    },
+    "rules": {
+        "arrow-body-style": ["error", "as-needed"],
+        "arrow-parens": ["error", "as-needed"],
+        "arrow-spacing": ["error", { "before": true, "after": true }],
+        "quotes": ["error", "double"],
+        "no-shadow": ["error"],
+        "no-shadow-restricted-names": ["error"],
+        "no-unused-vars": ["error"],
+        "no-use-before-define": ["error"],
+        "no-this-before-super": ["error"],
+        "no-useless-constructor": ["error"],
+        "no-var": ["error"]
     }
 }

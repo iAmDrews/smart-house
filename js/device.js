@@ -1,13 +1,7 @@
-"use strict";
-
-class DigitalWatch {
+class Device {
   constructor(name) {
     this.__name = name;
     this.__state = false;
-    this.__color = ["White", "Green", "Red"];
-    this.__currentColor = null;
-    this.__brightness = 0;
-    this.__clock = null;
   }
 
   set name(value) {
@@ -24,16 +18,35 @@ class DigitalWatch {
 
   on() {
     this.__state = true;
-    this.__clockStart();
   }
 
   off() {
     this.__state = false;
-    this.__clockStop();
   }
 
   get state() {
     return this.__state;
+  }
+  /*set timer(val) {}*/
+}
+
+class DigitalWatch extends Device {
+  constructor(name) {
+    super(name);
+    this.__color = ["White", "Green", "Red"];
+    this.__currentColor = null;
+    this.__brightness = 0;
+    this.__clock = null;
+  }
+
+  on() {
+    super.on();
+    this.__clockStart();
+  }
+
+  off() {
+    super.off();
+    this.__clockStop();
   }
 
   changeColor(value) {
@@ -48,7 +61,7 @@ class DigitalWatch {
         this.__currentColor = value;
         break;
       default:
-        this.__currentColor = "Wrong type of data or wrong color";
+        throw new Error("incorrect color");
     }
   }
 
@@ -99,9 +112,61 @@ class DigitalWatch {
   }
 }
 
-const digitalWatch = new DigitalWatch("samsung");
+class Multicooker extends Device {
+  constructor(name) {
+    super(name);
+    this.__tasklist = ["task1", "task2", "task3", "task4"];
+    this.__task = null; //a task for device
+    this.__currentTask = 0; //a task that is currently viewed in task list
+    this.__temperature = 100;
+  }
 
-digitalWatch.increaseBrightness();
-digitalWatch.increaseBrightness();
-digitalWatch.increaseBrightness();
-digitalWatch.brightness;
+  tasklist() {
+    for (const item of this.__tasklist) {
+      console.log(item);
+    }
+  }
+
+  get task() {
+    if (this.__task != null) {
+      return this.__task;
+    } else {
+      return console.log("There's no set task!!");
+    }
+  }
+
+  setUpTask() {
+    this.__task = this.__tasklist[this.__currentTask];
+  }
+
+  get currentTask() {
+    return this.__tasklist[this.__currentTask];
+  }
+
+  nextTask() {
+    if (this.__currentTask < this.__tasklist.length - 1)
+      return this.__currentTask++;
+  }
+  previousTask() {
+    if (this.__currentTask > this.__tasklist.length - 1)
+      return this.__currentTask--;
+  }
+
+  get temperature() {
+    return this.__temperature;
+  }
+
+  increaseTemperature() {
+    if (this.__temperature < 100 && this.__temperature > 0)
+      this.__temperature++;
+  }
+  decreaseTemperature() {
+    if (this.__temperature < 100 && this.__temperature > 0)
+      this.__temperature--;
+  }
+}
+
+const digitalWatch = new DigitalWatch("xiomi");
+const multicooker = new Multicooker("redmond");
+digitalWatch.on();
+multicooker.on();
