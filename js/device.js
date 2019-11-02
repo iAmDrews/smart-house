@@ -2,14 +2,13 @@ class Device {
   constructor(name) {
     this.__name = name;
     this.__state = false;
+    this.__userTime = null;
+    this.__currentTime = null;
   }
 
-  set name(value) {
+  set name(str) {
     const regExp = /^\w{4,10}/i;
-    const result = value.match(regExp);
-    if (result !== null) {
-      this.__name = result[0];
-    } else throw new Error("incorrect name");
+    this.__name = this.__isValidStr(regExp, str, "inccorect name");
   }
 
   get name() {
@@ -27,7 +26,40 @@ class Device {
   get state() {
     return this.__state;
   }
-  /*set timer(val) {}*/
+
+  set timer(str) {
+    const regExp = /^([01]\d|2[0-3]):[0-5][0-9]/;
+    this.__userTime = this.__isValidStr(regExp, str, "incorrect format of time use -> hh:mm");
+    this.__currentTime = this.__takeCurrentTime();
+    setTimeout(() => console.log("WAKE UP, TIME TO WORK HARD"), this.__timeConverter(this.__currentTime, this.__userTime));
+  }
+
+  __takeCurrentTime() {
+    const date = new Date();
+    const hours =
+      date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    const minutes =
+      date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    const result = `${hours}:${minutes}`;
+    return result;
+  }
+
+  __timeConverter(currentTime, userTime) {
+    let currentTimeArray = currentTime.split(":");
+    let userTimeArray = userTime.split(":");
+    let currentMilliseconds = (currentTimeArray[0] * 60 * 60 * 1000) + (currentTimeArray[1] * 60 * 1000);
+    let userMilliseconds = (userTimeArray[0] * 60 * 60 * 1000) + (userTimeArray[1] * 60  * 1000);
+    return Math.abs(userMilliseconds - currentMilliseconds);
+  }
+
+  __isValidStr(regularExp, str, reason) {
+    const result = str.match(regularExp);
+    let findValue;
+    if (result !== null) {
+      findValue = result[0];
+      return findValue;
+    } else console.error(reason);
+  }
 }
 
 class DigitalWatch extends Device {
@@ -50,18 +82,10 @@ class DigitalWatch extends Device {
   }
 
   changeColor(value) {
-    switch (value) {
-      case this.__color[0]:
-        this.__currentColor = value;
-        break;
-      case this.__color[1]:
-        this.__currentColor = value;
-        break;
-      case this.__color[2]:
-        this.__currentColor = value;
-        break;
-      default:
-        throw new Error("incorrect color");
+    if (this.__colors.includes(value)) {
+      this.__currentColor = value;
+    } else {
+      console.error("Wrong type of data or wrong color");
     }
   }
 
@@ -70,11 +94,15 @@ class DigitalWatch extends Device {
   }
 
   increaseBrightness() {
-    if (this.__state === true && this.__brightness < 10) this.__brightness++;
+    if (this.__state === true && this.__brightness < 10) {
+      this.__brightness++;
+    }
   }
 
   decreaseBrightness() {
-    if (this.__state === true && this.__brightness > 0) this.__brightness--;
+    if (this.__state === true && this.__brightness > 0) {
+      this.__brightness--;
+    }
   }
 
   get brightness() {
@@ -82,24 +110,10 @@ class DigitalWatch extends Device {
   }
 
   __setUpClock() {
-    const currentTime = new Date();
-    const hours =
-      currentTime.getHours() < 10
-        ? "0" + currentTime.getHours()
-        : currentTime.getHours();
-    const minutes =
-      currentTime.getMinutes() < 10
-        ? "0" + currentTime.getMinutes()
-        : currentTime.getMinutes();
-    const seconds =
-      currentTime.getSeconds() < 10
-        ? "0" + currentTime.getSeconds()
-        : currentTime.getSeconds();
-    const dateStr = String(currentTime);
-    const regExp = /(\w{3}\s){2}\d{2}\s\d{4}/;
+    const dateStr = String(new Date());
+    const regExp = /(\w{3}\s){2}\d{2}\s\d{4}\s(\d{2}:){2}\d{2}/;
     const currentDate = dateStr.match(regExp)[0];
-
-    console.log(`Date: ${currentDate}\nTime: ${hours}:${minutes}:${seconds}`);
+    console.log(`Date&Time: ${currentDate}`);
   }
 
   __clockStart() {

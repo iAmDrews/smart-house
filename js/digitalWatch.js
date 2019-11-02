@@ -1,10 +1,8 @@
-"use strict";
-
 class DigitalWatch {
   constructor(name) {
     this.__name = name;
     this.__state = false;
-    this.__color = ["White", "Green", "Red"];
+    this.__colors = ["White", "Green", "Red"];
     this.__currentColor = null;
     this.__brightness = 0;
     this.__clock = null;
@@ -37,18 +35,10 @@ class DigitalWatch {
   }
 
   changeColor(value) {
-    switch (value) {
-      case this.__color[0]:
-        this.__currentColor = value;
-        break;
-      case this.__color[1]:
-        this.__currentColor = value;
-        break;
-      case this.__color[2]:
-        this.__currentColor = value;
-        break;
-      default:
-        this.__currentColor = "Wrong type of data or wrong color";
+    if (this.__colors.includes(value)) {
+      this.__currentColor = value;
+    } else {
+      console.error("Wrong type of data or wrong color");
     }
   }
 
@@ -57,11 +47,15 @@ class DigitalWatch {
   }
 
   increaseBrightness() {
-    if (this.__state === true && this.__brightness < 10) this.__brightness++;
+    if (this.__state === true && this.__brightness < 10) {
+      this.__brightness++;
+    }
   }
 
   decreaseBrightness() {
-    if (this.__state === true && this.__brightness > 0) this.__brightness--;
+    if (this.__state === true && this.__brightness > 0) {
+      this.__brightness--;
+    }
   }
 
   get brightness() {
@@ -69,24 +63,10 @@ class DigitalWatch {
   }
 
   __setUpClock() {
-    const currentTime = new Date();
-    const hours =
-      currentTime.getHours() < 10
-        ? "0" + currentTime.getHours()
-        : currentTime.getHours();
-    const minutes =
-      currentTime.getMinutes() < 10
-        ? "0" + currentTime.getMinutes()
-        : currentTime.getMinutes();
-    const seconds =
-      currentTime.getSeconds() < 10
-        ? "0" + currentTime.getSeconds()
-        : currentTime.getSeconds();
-    const dateStr = String(currentTime);
-    const regExp = /(\w{3}\s){2}\d{2}\s\d{4}/;
+    const dateStr = String(new Date());
+    const regExp = /(\w{3}\s){2}\d{2}\s\d{4}\s(\d{2}:){2}\d{2}/;
     const currentDate = dateStr.match(regExp)[0];
-
-    console.log(`Date: ${currentDate}\nTime: ${hours}:${minutes}:${seconds}`);
+    console.log(`Date&Time: ${currentDate}`);
   }
 
   __clockStart() {
