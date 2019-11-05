@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint **/*.js",
-    "lint:fix": "eslint --fix **/*.js"
+    "start": "webpack-dev-server --open",
+    "lint": "eslint ./js/*.js",
+    "lint:fix": "eslint --fix ./js/*.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,18 @@
   },
   "homepage": "https://github.com/Drews99/smart-house#readme",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^5.0.4"
   }
 }

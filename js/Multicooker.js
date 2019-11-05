@@ -1,59 +1,66 @@
-"use strict";
+import Device from "./device";
 
-class Multicooker {
-  constructor() {
-    this.__name = null;
-    this.__state = null;
-    this.__tasklist = ["task1", "task2", "task3", "task4"];
-    this.__task = null; //a task for device
-    this.__currentTask = 0; //a task that is currently viewed in task list
-    this.__temperature = 100;
+export default class Multicooker extends Device {
+  constructor(name) {
+    super(name);
+    this._tasklist = ["task1", "task2", "task3", "task4"];
+    this._task = null; //a task for device
+    this._currentTask = 0; //a task that is currently viewed in task list
+    this._temperature = 100;
   }
 
-  tasklist() {
-    for (const item of this.__tasklist) {
-      console.log(item);
-    }
+  get tasklist() {
+    return this._taskList;
   }
 
   get task() {
-    if (this.__task != null) {
-      return this.__task;
-    } else {
-      return console.log("There's no set task!!");
+    if (this._task != null) {
+      return this._task;
     }
   }
 
+  //the main goal is to let user move through the task list only with the help of nextTask() and previousTask() methods
+  //so this method has no arguments
   setUpTask() {
-    this.__task = this.__tasklist[this.__currentTask];
+    this._task = this._tasklist[this._currentTask];
   }
 
   get currentTask() {
-    return this.__tasklist[this.__currentTask];
+    return this._tasklist[this._currentTask];
   }
 
   nextTask() {
-    if (this.__currentTask < this.__tasklist.length - 1)
-      return this.__currentTask++;
+    if (this._currentTask > this._tasklist.length - 1) {
+      return this._currentTask;
+    } else {
+      return this._currentTask++;
+    }
   }
+
   previousTask() {
-    if (this.__currentTask > this.__tasklist.length - 1)
-      return this.__currentTask--;
+    if (this._currentTask <= 0) {
+      return this._currentTask;
+    } else {
+      return this._currentTask--;
+    }
   }
 
   get temperature() {
-    return this.__temperature;
+    return this._temperature;
   }
 
   increaseTemperature() {
-    if (this.__temperature < 100 && this.__temperature > 0)
-      this.__temperature++;
+    if (this._temperature >= 100) {
+      return this._temperature;
+    } else {
+      return this._temperature++;
+    }
   }
   decreaseTemperature() {
-    if (this.__temperature < 100 && this.__temperature > 0)
-      this.__temperature--;
+    if (this._temperature <= 0) {
+      return this._temperature;
+    } else {
+      return this._temperature--;
+    }
   }
 }
-
-const multicooker = new Multicooker("redmond");
-multicooker.name;

@@ -1,44 +1,29 @@
-class DigitalWatch {
+import Device from "./device";
+
+export default class DigitalWatch extends Device {
   constructor(name) {
-    this.__name = name;
-    this.__state = false;
+    super(name);
     this.__colors = ["White", "Green", "Red"];
     this.__currentColor = null;
     this.__brightness = 0;
     this.__clock = null;
   }
 
-  set name(value) {
-    const regExp = /^\w{4,10}/i;
-    const result = value.match(regExp);
-    if (result !== null) {
-      this.__name = result[0];
-    } else throw new Error("incorrect name");
-  }
-
-  get name() {
-    return this.__name;
-  }
-
   on() {
-    this.__state = true;
+    super.on();
     this.__clockStart();
   }
 
   off() {
-    this.__state = false;
+    super.off();
     this.__clockStop();
   }
 
-  get state() {
-    return this.__state;
-  }
-
   changeColor(value) {
-    if (this.__colors.includes(value)) {
+    if (this.__state === true && this.__colors.includes(value)) {
       this.__currentColor = value;
     } else {
-      console.error("Wrong type of data or wrong color");
+      console.error("Wrong color or device is disabled");
     }
   }
 
@@ -66,7 +51,7 @@ class DigitalWatch {
     const dateStr = String(new Date());
     const regExp = /(\w{3}\s){2}\d{2}\s\d{4}\s(\d{2}:){2}\d{2}/;
     const currentDate = dateStr.match(regExp)[0];
-    console.log(`Date&Time: ${currentDate}`);
+    document.getElementById("root").innerText = `Date&Time: ${currentDate}`;
   }
 
   __clockStart() {
@@ -76,12 +61,6 @@ class DigitalWatch {
   __clockStop() {
     clearInterval(this.__clock);
     this.__clock = null;
+    document.getElementById("root").innerText = "";
   }
 }
-
-const digitalWatch = new DigitalWatch("samsung");
-
-digitalWatch.increaseBrightness();
-digitalWatch.increaseBrightness();
-digitalWatch.increaseBrightness();
-digitalWatch.brightness;

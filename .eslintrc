@@ -8,13 +8,14 @@
         "node": true
     },
     "parserOptions": {
-        "ecmaVersion": 8
+        "ecmaVersion": 8,
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
     },
     "rules": {
         "arrow-body-style": ["error", "as-needed"],
         "arrow-parens": ["error", "as-needed"],
         "arrow-spacing": ["error", { "before": true, "after": true }],
-        "quotes": ["error", "double"],
         "no-shadow": ["error"],
         "no-shadow-restricted-names": ["error"],
         "no-unused-vars": ["error"],
