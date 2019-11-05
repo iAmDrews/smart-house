@@ -6,8 +6,7 @@ const multiCooker = new Multicooker("samsung");
 
 digitalWatch.on();
 console.log(digitalWatch.name);
-digitalWatch.name = "clock1";
+digitalWatch.name = "clock2";
 digitalWatch.changeColor("");
 console.log(digitalWatch.name);
 multiCooker.on();
-digitalWatch.timer("02:14", 5);
