@@ -30,19 +30,16 @@ export default class Multicooker extends Device {
   }
 
   nextTask() {
-    if (this._currentTask > this._tasklist.length - 1) {
-      return this._currentTask;
-    } else {
-      return this._currentTask++;
-    }
+    return this.__state === true &&
+      this._currentTask > this._tasklist.length - 1
+      ? this._currentTask
+      : this._currentTask++;
   }
 
   previousTask() {
-    if (this._currentTask <= 0) {
-      return this._currentTask;
-    } else {
-      return this._currentTask--;
-    }
+    return this.__state === true && this._currentTask <= 0
+      ? this._currentTask
+      : this._currentTask--;
   }
 
   get temperature() {
@@ -50,17 +47,13 @@ export default class Multicooker extends Device {
   }
 
   increaseTemperature() {
-    if (this._temperature >= 100) {
-      return this._temperature;
-    } else {
-      return this._temperature++;
-    }
+    return this.__state === true && this._temperature >= 100
+      ? this._temperature
+      : this._temperature++;
   }
   decreaseTemperature() {
-    if (this._temperature <= 0) {
-      return this._temperature;
-    } else {
-      return this._temperature--;
-    }
+    return this.__state === true && this._temperature <= 0
+      ? this._temperature
+      : this._temperature--;
   }
 }

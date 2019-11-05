@@ -29,9 +29,16 @@ export default class Device {
 
   timer(str, toggler) {
     const regExp = /^([01]\d|2[0-3]):[0-5][0-9]/;
-    this.__userTime = this.__isValidStr(regExp, str, "incorrect format of time use -> hh:mm");
+    this.__userTime = this.__isValidStr(
+      regExp,
+      str,
+      "incorrect format of time use -> hh:mm"
+    );
     this.__currentTime = this.__takeCurrentTime();
-    const convertedTime = this.__timeConverter(this.__currentTime, this.__userTime);
+    const convertedTime = this.__timeConverter(
+      this.__currentTime,
+      this.__userTime
+    );
     const promise = new Promise(function(resolve, reject) {
       if (toggler === true) {
         setTimeout(() => resolve("cook"), convertedTime);
