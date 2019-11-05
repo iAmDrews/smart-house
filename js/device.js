@@ -8,7 +8,7 @@ export default class Device {
 
   set name(str) {
     const regExp = /^\w{4,10}/i;
-    this.__name = this.__isValidStr(regExp, str, "inccorect name");
+    this.__name = this.__isValidStr(regExp, str, "incorrect name");
   }
 
   get name() {
@@ -31,14 +31,24 @@ export default class Device {
     const regExp = /^([01]\d|2[0-3]):[0-5][0-9]/;
     this.__userTime = this.__isValidStr(regExp, str, "incorrect format of time use -> hh:mm");
     this.__currentTime = this.__takeCurrentTime();
-
-    if (toggler === true) {
-      setTimeout(() => console.log("Time to cook"), this.__timeConverter(this.__currentTime, this.__userTime));
-    } else if(toggler === false) {
-      setTimeout(() => console.log("Wake up, time to work hard!"), this.__timeConverter(this.__currentTime, this.__userTime));
-    } else {
-      console.error("Pls, put boolean data");
-    }
+    const convertedTime = this.__timeConverter(this.__currentTime, this.__userTime);
+    const promise = new Promise(function(resolve, reject) {
+      if (toggler === true) {
+        setTimeout(() => resolve("cook"), convertedTime);
+      } else if (toggler === false) {
+        setTimeout(() => resolve("wake up, work hard!"), convertedTime);
+      } else {
+        reject();
+      }
+    });
+    promise.then(
+      val => {
+        console.log(`Time to ${val}`);
+      },
+      () => {
+        console.error("Pls, put boolean data");
+      }
+    );
   }
 
   __takeCurrentTime() {
@@ -52,11 +62,11 @@ export default class Device {
   }
 
   __timeConverter(currentTime, userTime) {
-    let currentTimeArray = currentTime.split(":");
-    let userTimeArray = userTime.split(":");
-    let currentMilliseconds =
+    const currentTimeArray = currentTime.split(":");
+    const userTimeArray = userTime.split(":");
+    const currentMilliseconds =
       currentTimeArray[0] * 60 * 60 * 1000 + currentTimeArray[1] * 60 * 1000;
-    let userMilliseconds =
+    const userMilliseconds =
       userTimeArray[0] * 60 * 60 * 1000 + userTimeArray[1] * 60 * 1000;
     return Math.abs(userMilliseconds - currentMilliseconds);
   }
