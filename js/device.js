@@ -1,43 +1,43 @@
-export default class Device {
+export class Device {
   constructor(name) {
-    this.__name = name;
-    this.__state = false;
-    this.__userTime = null;
-    this.__currentTime = null;
+    this._name = name;
+    this._state = false;
+    this._userTime = null;
+    this._currentTime = null;
   }
 
   set name(str) {
     const regExp = /^\w{4,10}/i;
-    this.__name = this.__isValidStr(regExp, str, "incorrect name");
+    this._name = this._isValidStr(regExp, str, "incorrect name");
   }
 
   get name() {
-    return this.__name;
+    return this._name;
   }
 
   on() {
-    this.__state = true;
+    this._state = true;
   }
 
   off() {
-    this.__state = false;
+    this._state = false;
   }
 
   get state() {
-    return this.__state;
+    return this._state;
   }
 
   timer(str, toggler) {
     const regExp = /^([01]\d|2[0-3]):[0-5][0-9]/;
-    this.__userTime = this.__isValidStr(
+    this._userTime = this._isValidStr(
       regExp,
       str,
       "incorrect format of time use -> hh:mm"
     );
-    this.__currentTime = this.__takeCurrentTime();
-    const convertedTime = this.__timeConverter(
-      this.__currentTime,
-      this.__userTime
+    this._currentTime = this._takeCurrentTime();
+    const convertedTime = this._timeConverter(
+      this._currentTime,
+      this._userTime
     );
     const promise = new Promise(function(resolve, reject) {
       if (toggler === true) {
@@ -58,7 +58,7 @@ export default class Device {
     );
   }
 
-  __takeCurrentTime() {
+  _takeCurrentTime() {
     const date = new Date();
     const hours =
       date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
@@ -68,7 +68,7 @@ export default class Device {
     return result;
   }
 
-  __timeConverter(currentTime, userTime) {
+  _timeConverter(currentTime, userTime) {
     const currentTimeArray = currentTime.split(":");
     const userTimeArray = userTime.split(":");
     const currentMilliseconds =
@@ -78,7 +78,7 @@ export default class Device {
     return Math.abs(userMilliseconds - currentMilliseconds);
   }
 
-  __isValidStr(regularExp, str, reason) {
+  _isValidStr(regularExp, str, reason) {
     const result = str.match(regularExp);
     let findValue;
     if (result !== null) {

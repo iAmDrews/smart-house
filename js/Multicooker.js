@@ -1,6 +1,6 @@
-import Device from "./device";
+import { Device } from "./device";
 
-export default class Multicooker extends Device {
+export class Multicooker extends Device {
   constructor(name) {
     super(name);
     this._tasklist = ["task1", "task2", "task3", "task4"];
@@ -30,16 +30,16 @@ export default class Multicooker extends Device {
   }
 
   nextTask() {
-    return this.__state === true &&
+    return this._state === true &&
       this._currentTask > this._tasklist.length - 1
       ? this._currentTask
-      : this._currentTask++;
+      : ++this._currentTask;
   }
 
   previousTask() {
-    return this.__state === true && this._currentTask <= 0
+    return this._state === true && this._currentTask <= 0
       ? this._currentTask
-      : this._currentTask--;
+      : --this._currentTask;
   }
 
   get temperature() {
@@ -47,13 +47,20 @@ export default class Multicooker extends Device {
   }
 
   increaseTemperature() {
-    return this.__state === true && this._temperature >= 100
+    return this._state === true && this._temperature >= 100
       ? this._temperature
-      : this._temperature++;
+      : ++this._temperature;
   }
   decreaseTemperature() {
-    return this.__state === true && this._temperature <= 0
+    return this._state === true && this._temperature <= 0
       ? this._temperature
-      : this._temperature--;
+      : --this._temperature;
   }
+
+  setUpTaskWithTimer(str){
+    super.timer(str, true);
+    this._task = this._tasklist[this._currentTask];
+  }
+
+
 }
