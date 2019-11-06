@@ -58,7 +58,9 @@ export class Multicooker extends Device {
   }
 
   setUpTaskWithTimer(str){
-    super.timer(str, true);
+    (async () => {
+      await super.timer(str, true);
+    })();
     this._task = this._tasklist[this._currentTask];
   }
 
