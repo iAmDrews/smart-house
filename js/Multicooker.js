@@ -19,10 +19,8 @@ export class Multicooker extends Device {
     }
   }
 
-  //the main goal is to let user move through the task list only with the help of nextTask() and previousTask() methods
-  //so this method has no arguments
   setUpTask() {
-    this._task = this._tasklist[this._currentTask];
+    this._state === true ? this._task = this._tasklist[this._currentTask] : this._task = this._tasklist[0];
   }
 
   get currentTask() {
@@ -56,13 +54,4 @@ export class Multicooker extends Device {
       ? this._temperature
       : --this._temperature;
   }
-
-  setUpTaskWithTimer(str){
-    (async () => {
-      await super.timer(str, true);
-    })();
-    this._task = this._tasklist[this._currentTask];
-  }
-
-
 }

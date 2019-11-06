@@ -1,0 +1,14 @@
+class SmartHouse
+   state
+     #name: String
+     #devices: Object(Map)
+   behaviour
+     +constructor(name)
+     +get name(): String
+     +addDevice(value: Object): void
+     +deleteDevice(value: String): void
+     +get allDevices(): Object(Map)
+     +deleteAllDevices(): void
+     +everythingOn(): void
+     +everythingOff(): void
+     +getDeviceByName(value: String): Object

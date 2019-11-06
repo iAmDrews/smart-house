@@ -14,7 +14,7 @@ export class SmartHouse {
     if (obj instanceof Device) {
       this._devices.set(obj.name, obj);
     } else {
-      console.error("this obj does not extend from Device");
+      console.error("this value does not extend from Device");
     }
   }
 

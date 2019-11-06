@@ -41,7 +41,7 @@ export class Device {
     );
     const promise = new Promise(function(resolve, reject) {
       if (toggler === true) {
-         setTimeout(() => resolve("cook"), convertedTime);
+        setTimeout(() => resolve("cook"), convertedTime);
       } else if (toggler === false) {
         setTimeout(() => resolve("wake up, work hard!"), convertedTime);
       } else {

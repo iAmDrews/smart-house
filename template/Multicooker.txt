@@ -7,13 +7,11 @@ Class Multicooker
       #currentTask: Number
       #temperature: Number
    behaviour
-      #nameChecker(String)      void
-      #taskChecker(Number)      void
 
-      +constructor(name) 
-       
+      +constructor(name)
+
       +get name():              String
-      +set name(String):        void  
+      +set name(value: String): void
       +on():                    void
       +off():                   void
       +get state():             Boolean
@@ -22,8 +20,7 @@ Class Multicooker
       +set task():              void
       +get currentTask():       String
       +nextTask():              void
-      +previousTask():          void 
+      +previousTask():          void
       +increaseTemperature():   void
       +decreaseTemperature():   void
       +get temperature():       Number
-				

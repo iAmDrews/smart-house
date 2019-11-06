@@ -1,0 +1,53 @@
+class Device
+   state
+     #name: String
+     #state: Boolean
+     #userTime: String
+     #currentTime: String
+     #convertedTime: Number
+   behaviour
+     +constructor(name)
+     +set name(value: String): void
+     +get name(): String
+     +on(): void
+     +off(): void
+     +timer(value: String, toggler: Boolean): void
+     #takeCurrentTime(): String
+     #timeConverter: Number
+     #isValidStr: String
+
+class DigitalWatch extends Device
+   state
+     #colors: [String]
+     #currentColor: String
+     #brightness: Number
+     #clock: String
+   behaviour
+     +constructor(name)
+     +on(): void
+     +off(): void
+     +changeColor(value: String): void
+     +get color: String
+     +increaseBrightness(): void
+     +decreaseBrightness(): void
+     +get brightness(): Number
+     #setUpClock(): String
+     #clockStart(): void
+     #clockStop(): void
+
+class MultiCooker extends Device
+     #taskList: [String]
+     #task: Number
+     #currentTask: Number
+     #temperature: Number
+   behaviour
+     +constructor(name)
+     +get taskList():          String
+     +get task():              String
+     +set task():              void
+     +get currentTask():       String
+     +nextTask():              void
+     +previousTask():          void
+     +increaseTemperature():   void
+     +decreaseTemperature():   void
+     +get temperature():       Number
