@@ -27,7 +27,7 @@ export class Device {
     return this._state;
   }
 
-  timer(str, toggler) {
+  async timer(str, toggler) {
     const regExp = /^([01]\d|2[0-3]):[0-5][0-9]/;
     this._userTime = this._isValidStr(
       regExp,
@@ -39,23 +39,15 @@ export class Device {
       this._currentTime,
       this._userTime
     );
-    const promise = new Promise(function(resolve, reject) {
+    await new Promise(function(resolve, reject) {
       if (toggler === true) {
-        setTimeout(() => resolve("cook"), convertedTime);
+        setTimeout(() => resolve("time to cook"), convertedTime);
       } else if (toggler === false) {
         setTimeout(() => resolve("wake up, work hard!"), convertedTime);
       } else {
-        reject();
+        reject("Pls, put boolean data");
       }
-    });
-    promise.then(
-      val => {
-        console.log(`Time to ${val}`);
-      },
-      () => {
-        console.error("Pls, put boolean data");
-      }
-    );
+    }).then(result => console.log(result), error => console.log(error));
   }
 
   _takeCurrentTime() {

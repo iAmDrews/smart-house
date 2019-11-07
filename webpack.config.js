@@ -4,7 +4,7 @@ const copyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   devtool: "source-map",
   mode: "development",
-  entry: "./js/index.js",
+  entry: ["@babel/polyfill", "./js/index.js"],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")

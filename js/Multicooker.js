@@ -54,4 +54,10 @@ export class Multicooker extends Device {
       ? this._temperature
       : --this._temperature;
   }
+
+  async setUpTaskWithTimer(str){
+    await super.timer(str, true);
+    this._task = this._tasklist[this._currentTask];
+    console.log("task is set");
+  }
 }

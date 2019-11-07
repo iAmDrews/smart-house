@@ -42,12 +42,13 @@ class MultiCooker extends Device
      #temperature: Number
    behaviour
      +constructor(name)
-     +get taskList():          String
-     +get task():              String
-     +set task():              void
-     +get currentTask():       String
-     +nextTask():              void
-     +previousTask():          void
-     +increaseTemperature():   void
-     +decreaseTemperature():   void
-     +get temperature():       Number
+     +get taskList():                     String
+     +get task():                         String
+     +set task():                         void
+     +get currentTask():                  String
+     +nextTask():                         void
+     +previousTask():                     void
+     +increaseTemperature():              void
+     +decreaseTemperature():              void
+     +get temperature():                  Number
+     +setUpTaskWithTimer(value: String)   void

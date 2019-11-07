@@ -19,11 +19,7 @@ export class SmartHouse {
   }
 
   deleteDevice(name) {
-    for (let key of this._devices.keys()) {
-      if (key === name) {
-        this._devices.delete(key);
-      }
-    }
+    this._devices.delete(name);
   }
 
   get allDevices() {
@@ -47,10 +43,6 @@ export class SmartHouse {
   }
 
   getDeviceByName(name) {
-    for (let key of this._devices.keys()) {
-      if (key === name) {
-        return this._devices.get(key);
-      }
-    }
+    return this._devices.get(name);
   }
 }

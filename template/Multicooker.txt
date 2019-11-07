@@ -10,17 +10,17 @@ Class Multicooker
 
       +constructor(name)
 
-      +get name():              String
-      +set name(value: String): void
-      +on():                    void
-      +off():                   void
-      +get state():             Boolean
-      +get taskList():          String
-      +get task():              String
-      +set task():              void
-      +get currentTask():       String
-      +nextTask():              void
-      +previousTask():          void
-      +increaseTemperature():   void
-      +decreaseTemperature():   void
-      +get temperature():       Number
+      +get name():                         String
+      +set name(value: String):            void
+      +on():                               void
+      +off():                              void
+      +get state():                        Boolean
+      +get taskList():                     String
+      +get task():                         String
+      +set task():                         void
+      +get currentTask():                  String
+      +nextTask():                         void
+      +previousTask():                     void
+      +increaseTemperature():              void
+      +decreaseTemperature():              void
+      +get temperature():                  Number
